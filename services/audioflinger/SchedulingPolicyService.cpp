@@ -27,6 +27,9 @@ static Mutex sMutex;
 
 int requestPriority(pid_t pid, pid_t tid, int32_t prio)
 {
+#if 1
+	return 0;
+#else
     // FIXME merge duplicated code related to service lookup, caching, and error recovery
     sp<ISchedulingPolicyService> sps;
     for (;;) {
@@ -47,6 +50,7 @@ int requestPriority(pid_t pid, pid_t tid, int32_t prio)
         sleep(1);
     }
     return sps->requestPriority(pid, tid, prio);
+#endif
 }
 
 }   // namespace android
